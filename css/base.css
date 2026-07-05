@@ -86,11 +86,15 @@ button, input, select, textarea { font: inherit; color: inherit; }
   color: var(--color-text-muted);
 }
 
+.mobile-contacto { display: none; }
+
 /* ---------- Ajustes solo para celular ---------- */
 @media (max-width: 640px) {
   .section { padding: var(--space-6) 0; }
   .section-head { margin-bottom: var(--space-5); }
   .container { padding: 0 var(--space-4); }
+  .catalogo-destacado { display: none; }
+  .mobile-contacto { display: block; }
 }
 
 .eyebrow {

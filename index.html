@@ -152,7 +152,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section catalogo-destacado">
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Catálogo</span>
@@ -198,7 +198,7 @@
   <section class="section section--alt">
     <div class="container">
       <div class="banner reveal">
-        <div>
+        <div class="banner-content">
           <span class="eyebrow" style="color:#9fd4ff;">Chillers industriales</span>
           <h2>Chillers de 20 a 150 TR adaptados a tu operación</h2>
           <p>Fabricamos e instalamos equipos chiller para farmacéutica, alimentos y bebidas, centros de datos y hospitales, con ingeniería diseñada para las condiciones exactas de tu planta.</p>
@@ -207,7 +207,7 @@
             <a href="contacto.html?interes=chiller" class="btn btn-outline" style="border-color:#fff; color:#fff;">Cotizar a medida</a>
           </div>
         </div>
-        <div class="img-placeholder img-placeholder--wide" style="border-color: rgba(255,255,255,0.4); background: repeating-linear-gradient(135deg, rgba(255,255,255,0.08) 0px, rgba(255,255,255,0.08) 14px, rgba(255,255,255,0.14) 14px, rgba(255,255,255,0.14) 28px); color:#fff;">
+        <div class="img-placeholder img-placeholder--wide banner-media" style="border-color: rgba(255,255,255,0.4); background: repeating-linear-gradient(135deg, rgba(255,255,255,0.08) 0px, rgba(255,255,255,0.08) 14px, rgba(255,255,255,0.14) 14px, rgba(255,255,255,0.14) 28px); color:#fff;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M7 7V4h10v3"/></svg>
           <span style="color:#fff;">[Foto — Sala de chillers]</span>
         </div>
@@ -235,6 +235,109 @@
         <h2>¿Listo para cotizar?</h2>
         <p class="lead">Cuéntanos qué necesitas y te respondemos el mismo día hábil.</p>
         <a href="contacto.html" class="btn btn-primary">Contáctanos ahora</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt mobile-contacto">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Contacto</span>
+        <h2>Hablemos de tu proyecto</h2>
+        <p>Completa el formulario o escríbenos directamente por WhatsApp.</p>
+      </div>
+      <div class="contact-grid">
+
+        <div class="contact-card">
+          <h2>Cuéntanos qué necesitas</h2>
+          <form id="contact-form" novalidate>
+            <div class="form-field">
+              <label for="nombre-inicio">Nombre completo *</label>
+              <input type="text" id="nombre-inicio" name="nombre" required>
+              <p class="form-error" role="alert"></p>
+            </div>
+            <div class="form-field">
+              <label for="empresa-inicio">Empresa</label>
+              <input type="text" id="empresa-inicio" name="empresa">
+              <p class="form-error" role="alert"></p>
+            </div>
+            <div class="form-field">
+              <label for="email-inicio">Correo electrónico *</label>
+              <input type="email" id="email-inicio" name="email" required>
+              <p class="form-error" role="alert"></p>
+            </div>
+            <div class="form-field">
+              <label for="telefono-inicio">Teléfono / WhatsApp *</label>
+              <input type="tel" id="telefono-inicio" name="telefono" required>
+              <p class="form-error" role="alert"></p>
+            </div>
+            <div class="form-field">
+              <label for="localidad-inicio">Localidad en Bogotá</label>
+              <select id="localidad-inicio" name="localidad">
+                <option value="">Selecciona una localidad</option>
+                <option value="bogota">Bogotá (todas las localidades)</option>
+                <option value="otra">Fuera de Bogotá</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="interes-inicio">Servicio de interés</label>
+              <select id="interes-inicio" name="interes">
+                <option value="">Selecciona una opción</option>
+                <option value="mantenimiento">Mantenimiento</option>
+                <option value="reparacion">Reparación</option>
+                <option value="instalacion">Instalación</option>
+                <option value="equipos">Aire acondicionado nuevo</option>
+                <option value="chiller">Chillers industriales</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="mensaje-inicio">Mensaje *</label>
+              <textarea id="mensaje-inicio" name="mensaje" required></textarea>
+              <p class="form-error" role="alert"></p>
+            </div>
+            <div class="form-field">
+              <div class="form-check">
+                <input type="checkbox" id="habeas-data-inicio" name="habeas_data" required>
+                <label for="habeas-data-inicio">Autorizo el tratamiento de mis datos personales conforme a la Ley 1581 de 2012 (Habeas Data). *</label>
+              </div>
+              <p class="form-error" role="alert"></p>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Enviar mensaje</button>
+            <p class="form-note" data-form-note></p>
+          </form>
+        </div>
+
+        <div>
+          <div class="contact-card" style="margin-bottom: var(--space-6);">
+            <h2>Datos de contacto</h2>
+            <ul class="contact-info-list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span><strong>Dirección</strong>Cra. 106 #71 a 83, Bogotá</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.1 4.18 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.1 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span><strong>Teléfono / WhatsApp</strong>+57 320 280 6062</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+                <span><strong>Correo</strong>contacto@andesfrio.com.co · ventas@andesfrio.com.co</span>
+              </li>
+            </ul>
+            <a href="https://wa.me/573202806062" target="_blank" rel="noopener" class="btn btn-primary btn-block">Escribir por WhatsApp</a>
+          </div>
+
+          <div class="map-embed">
+            <iframe
+              src="https://www.google.com/maps?q=Cra.+106+%2371+a+83,+Bogot%C3%A1,+Colombia&output=embed"
+              title="Ubicación de Andes Frío Industrial — Cra. 106 #71 a 83, Bogotá"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
