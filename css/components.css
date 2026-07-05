@@ -235,6 +235,19 @@ body.nav-open { overflow: hidden; }
 .img-placeholder--wide { aspect-ratio: 16 / 9; }
 .img-placeholder--square { aspect-ratio: 1 / 1; }
 
+/* ---------- Ajustes solo para celular ---------- */
+@media (max-width: 640px) {
+  .img-placeholder {
+    aspect-ratio: 16 / 9;
+    padding: var(--space-3);
+    gap: var(--space-1);
+  }
+  .img-placeholder--wide { aspect-ratio: 16 / 10; }
+  .img-placeholder--square { aspect-ratio: 16 / 10; }
+  .img-placeholder svg { width: 26px; height: 26px; }
+  .img-placeholder span { font-size: 0.6rem; }
+}
+
 /* ---------- Tarjeta de producto ---------- */
 .product-card {
   background: var(--color-surface);
@@ -270,6 +283,19 @@ body.nav-open { overflow: hidden; }
 }
 .product-card__footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); }
 .product-card__footer .btn { width: 100%; }
+
+/* ---------- Ajustes solo para celular: info antes que la foto ---------- */
+@media (max-width: 640px) {
+  .product-card {
+    padding: var(--space-4) var(--space-4) var(--space-5);
+    gap: var(--space-2);
+  }
+  .product-card__head { order: 1; }
+  .product-card__spec { order: 2; margin-bottom: var(--space-1); }
+  .product-card > .img-placeholder { order: 3; margin: var(--space-1) 0; }
+  .product-card__features { order: 4; }
+  .product-card__footer { order: 5; }
+}
 
 .product-grid {
   display: grid;
@@ -442,3 +468,17 @@ body.nav-open { overflow: hidden; }
 .floating-stat-card .icon-wrap svg { width: 22px; height: 22px; }
 .floating-stat-card strong { display: block; font-family: var(--font-heading); font-size: 1.2rem; color: var(--color-primary-dark); }
 .floating-stat-card span { font-size: 0.78rem; color: var(--color-text-muted); }
+
+/* ---------- Ajustes solo para celular ---------- */
+@media (max-width: 640px) {
+  .floating-stat-card {
+    left: 0.5rem;
+    bottom: 0.5rem;
+    padding: var(--space-3) var(--space-4);
+    gap: var(--space-2);
+  }
+  .floating-stat-card .icon-wrap { width: 36px; height: 36px; }
+  .floating-stat-card .icon-wrap svg { width: 18px; height: 18px; }
+  .floating-stat-card strong { font-size: 1rem; }
+  .floating-stat-card span { font-size: 0.7rem; }
+}
