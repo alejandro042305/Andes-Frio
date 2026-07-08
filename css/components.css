@@ -244,6 +244,7 @@ body.nav-open { overflow: hidden; }
 
 .product-card__photo {
   width: 100%;
+  height: auto;
   aspect-ratio: 1 / 1;
   object-fit: contain;
   object-position: center;

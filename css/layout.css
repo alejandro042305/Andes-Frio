@@ -13,6 +13,7 @@
   gap: var(--space-7);
   align-items: center;
 }
+.hero .container > * { min-width: 0; }
 @media (max-width: 900px) {
   .hero .container { grid-template-columns: 1fr; }
 }
@@ -72,6 +73,15 @@
 }
 
 .hero-media { position: relative; }
+.hero-photo {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
 
 .hero-actions { display: flex; gap: var(--space-4); flex-wrap: wrap; margin-top: var(--space-5); }
 .hero p.lead { font-size: 1.1rem; color: var(--color-text-muted); max-width: 46ch; }
@@ -114,7 +124,16 @@
   filter: blur(70px);
   pointer-events: none;
 }
-.banner > * { position: relative; z-index: 1; }
+.banner > * { position: relative; z-index: 1; min-width: 0; }
+.banner-photo {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 40px rgba(6, 58, 99, 0.35);
+}
 
 /* ---------- Banda de CTA final ---------- */
 .cta-band {
@@ -165,23 +184,22 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    aspect-ratio: auto;
-    margin: 0;
-    border: none;
-    border-radius: 0;
     z-index: 0;
-    align-items: flex-end;
-    justify-content: flex-end;
-    padding: var(--space-4);
   }
   .banner-media::before {
     content: "";
     position: absolute;
     inset: 0;
+    z-index: 1;
     background: linear-gradient(180deg, rgba(6, 58, 99, 0.2) 0%, rgba(6, 58, 99, 0.88) 88%);
   }
-  .banner-media svg { position: relative; z-index: 1; width: 22px; height: 22px; opacity: 0.6; }
-  .banner-media span { position: relative; z-index: 1; font-size: 0.55rem; }
+  .banner-media .banner-photo {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    border-radius: 0;
+    box-shadow: none;
+  }
 }
 
 /* ---------- Chips de cobertura ---------- */
@@ -246,6 +264,8 @@
   border-bottom: 1px solid var(--color-border);
 }
 .service-block:last-child { border-bottom: none; }
+.service-block--full { grid-template-columns: 1fr; }
+.service-block--full > div { max-width: 720px; }
 .service-block:nth-child(even) .service-block__media { order: -1; }
 @media (max-width: 860px) {
   .service-block { grid-template-columns: 1fr; }
@@ -253,6 +273,7 @@
 }
 .service-block__photo {
   width: 100%;
+  height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
   object-position: center;
