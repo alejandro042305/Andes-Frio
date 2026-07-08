@@ -185,6 +185,13 @@ body.nav-open { overflow: hidden; }
 }
 .footer-bottom a { color: #9fbcd8; }
 .footer-bottom a:hover { color: #fff; }
+.footer-bottom a.legal-link {
+  color: var(--color-primary-light);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.footer-bottom a.legal-link:hover { color: #fff; }
 
 /* ---------- WhatsApp flotante ---------- */
 .whatsapp-float {
