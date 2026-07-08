@@ -94,6 +94,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .section-head { margin-bottom: var(--space-5); }
   .container { padding: 0 var(--space-4); }
   .catalogo-destacado { display: none; }
+  .cta-cotizar-final { display: none; }
   .mobile-contacto { display: block; }
 }
 

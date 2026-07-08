@@ -38,10 +38,18 @@
   color: var(--color-primary-dark);
   flex-shrink: 0;
 }
-.brand svg { width: 40px; height: 40px; }
-.brand-text { display: flex; flex-direction: column; line-height: 1.1; }
-.brand-name { font-weight: 700; font-size: 1.15rem; }
-.brand-sub { font-size: 0.65rem; letter-spacing: 0.14em; color: var(--color-text-muted); }
+.brand-logo { height: 48px; width: auto; display: block; }
+@media (min-width: 768px) { .brand-logo { height: 56px; } }
+@media (max-width: 480px) { .brand-logo { height: 38px; } }
+
+.brand-logo-wrap {
+  display: inline-flex;
+  align-items: center;
+  background: #fff;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+}
+.brand-logo-wrap .brand-logo { height: 34px; }
 
 .main-nav {
   display: flex;
@@ -235,6 +243,18 @@ body.nav-open { overflow: hidden; }
 .img-placeholder--wide { aspect-ratio: 16 / 9; }
 .img-placeholder--square { aspect-ratio: 1 / 1; }
 
+.product-card__photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  object-position: center;
+  border-radius: var(--radius-md);
+  background: #fff;
+  border: 1px solid var(--color-border);
+  padding: var(--space-3);
+  display: block;
+}
+
 /* ---------- Ajustes solo para celular ---------- */
 @media (max-width: 640px) {
   .img-placeholder {
@@ -272,6 +292,12 @@ body.nav-open { overflow: hidden; }
   font-size: 0.95rem;
 }
 .product-card h3 { font-size: 1.05rem; margin-bottom: 0; }
+.product-card__description {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  margin: 0;
+}
 .product-card__features { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: var(--space-2) 0; }
 .product-card__features li {
   font-size: 0.78rem;
@@ -292,9 +318,11 @@ body.nav-open { overflow: hidden; }
   }
   .product-card__head { order: 1; }
   .product-card__spec { order: 2; margin-bottom: var(--space-1); }
-  .product-card > .img-placeholder { order: 3; margin: var(--space-1) 0; }
-  .product-card__features { order: 4; }
-  .product-card__footer { order: 5; }
+  .product-card__description { order: 3; }
+  .product-card > .img-placeholder,
+  .product-card > .product-card__photo { order: 4; margin: var(--space-1) 0; }
+  .product-card__features { order: 5; }
+  .product-card__footer { order: 6; }
 }
 
 .product-grid {
