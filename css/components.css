@@ -241,7 +241,6 @@ body.nav-open { overflow: hidden; }
   opacity: 0.8;
 }
 .img-placeholder--wide { aspect-ratio: 16 / 9; }
-.img-placeholder--square { aspect-ratio: 1 / 1; }
 
 .product-card__photo {
   width: 100%;
@@ -263,7 +262,6 @@ body.nav-open { overflow: hidden; }
     gap: var(--space-1);
   }
   .img-placeholder--wide { aspect-ratio: 16 / 10; }
-  .img-placeholder--square { aspect-ratio: 16 / 10; }
   .img-placeholder svg { width: 26px; height: 26px; }
   .img-placeholder span { font-size: 0.6rem; }
 }
