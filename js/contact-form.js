@@ -1,4 +1,4 @@
-const CONTACT_EMAIL = "contacto@andesfrio.com.co";
+const CONTACT_EMAIL = "andesfriocolombia@gmail.com";
 
 function setFieldError(field, message) {
   const wrapper = field.closest(".form-field");
