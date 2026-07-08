@@ -254,6 +254,41 @@
 @media (max-width: 900px) { .value-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .value-grid { grid-template-columns: 1fr; } }
 
+/* ---------- Galería de proyectos realizados ---------- */
+.proof-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+}
+.proof-gallery__item {
+  margin: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background: #fff;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.proof-gallery__item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.proof-gallery__item img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+}
+.proof-gallery__item figcaption {
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+@media (max-width: 900px) { .proof-gallery { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .proof-gallery { grid-template-columns: 1fr; } }
+
 /* ---------- Servicios ---------- */
 .service-block {
   display: grid;
