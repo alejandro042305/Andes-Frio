@@ -212,6 +212,36 @@ body.nav-open { overflow: hidden; }
   .whatsapp-float { animation: none; }
 }
 
+/* ---------- Botón de llamada flotante ---------- */
+.call-float {
+  position: fixed;
+  right: var(--space-5);
+  bottom: calc(var(--space-5) + 60px + var(--space-3));
+  z-index: 200;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(11, 91, 154, 0.45);
+  animation: call-pulse 2.6s infinite;
+}
+.call-float svg { width: 28px; height: 28px; }
+@keyframes call-pulse {
+  0%, 100% { box-shadow: 0 10px 25px rgba(11, 91, 154, 0.45); }
+  50% { box-shadow: 0 10px 25px rgba(11, 91, 154, 0.75), 0 0 0 10px rgba(11, 91, 154, 0.12); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .call-float { animation: none; }
+}
+@media (max-width: 640px) {
+  .call-float { width: 52px; height: 52px; }
+  .call-float svg { width: 24px; height: 24px; }
+}
+
 /* ---------- Placeholders de imagen ---------- */
 .img-placeholder {
   position: relative;
