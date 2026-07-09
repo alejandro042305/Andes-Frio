@@ -1,4 +1,4 @@
-const CONTACT_EMAIL = "andesfriocolombia@gmail.com";
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
 function setFieldError(field, message) {
   const wrapper = field.closest(".form-field");
@@ -67,7 +67,9 @@ export function initContactForm() {
 
   prefillFromQuery(form);
 
-  const fields = Array.from(form.querySelectorAll("input, select, textarea"));
+  const fields = Array.from(form.querySelectorAll("input, select, textarea")).filter((field) =>
+    field.closest(".form-field")
+  );
   const note = form.querySelector("[data-form-note]");
 
   fields.forEach((field) => {
@@ -93,27 +95,41 @@ export function initContactForm() {
     }
 
     const data = new FormData(form);
-    const lines = [
-      `Nombre: ${data.get("nombre") || ""}`,
-      `Empresa: ${data.get("empresa") || ""}`,
-      `Email: ${data.get("email") || ""}`,
-      `Teléfono: ${data.get("telefono") || ""}`,
-      `Ciudad: ${data.get("ciudad") || ""}`,
-      `Servicio de interés: ${data.get("interes") || ""}`,
-      "",
-      data.get("mensaje") || "",
-    ];
-    const subject = encodeURIComponent(`Solicitud de cotización — ${data.get("nombre") || ""}`);
-    const body = encodeURIComponent(lines.join("\n"));
+    data.set("subject", `Solicitud de cotización — ${data.get("nombre") || ""}`);
+    data.set("from_name", data.get("nombre") || "Sitio web Andes Frío");
 
-    // TODO: reemplazar por integración con un proveedor de formularios (ej. Formspree)
-    // cuando el sitio esté desplegado con conexión a internet.
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (submitButton) submitButton.disabled = true;
     if (note) {
-      note.textContent = "Se abrió tu cliente de correo con el mensaje listo para enviar. ¡Gracias por contactarnos!";
-      note.className = "form-note is-success";
+      note.textContent = "Enviando...";
+      note.className = "form-note";
     }
-    form.reset();
+
+    fetch(WEB3FORMS_ENDPOINT, {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: data,
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.success) {
+          if (note) {
+            note.textContent = "¡Mensaje enviado! Te contactaremos el mismo día hábil.";
+            note.className = "form-note is-success";
+          }
+          form.reset();
+        } else {
+          throw new Error(result.message || "Error desconocido");
+        }
+      })
+      .catch(() => {
+        if (note) {
+          note.textContent = "No pudimos enviar el mensaje. Intenta de nuevo o escríbenos por WhatsApp.";
+          note.className = "form-note is-error";
+        }
+      })
+      .finally(() => {
+        if (submitButton) submitButton.disabled = false;
+      });
   });
 }
