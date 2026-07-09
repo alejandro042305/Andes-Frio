@@ -233,7 +233,8 @@
 
         <div class="contact-card">
           <h2>Cuéntanos qué necesitas</h2>
-          <form id="contact-form" novalidate>
+          <form id="contact-form" novalidate action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="34e31b08-e240-4026-a3e6-f3bbd00abe3d">
             <div class="form-field">
               <label for="nombre-inicio">Nombre completo *</label>
               <input type="text" id="nombre-inicio" name="nombre" required>
