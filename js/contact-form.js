@@ -80,22 +80,11 @@ export function initContactForm() {
     });
   });
 
-  const targetFrame = document.querySelector('iframe[name="web3forms-frame"]');
-  let submitted = false;
-
-  if (targetFrame) {
-    targetFrame.addEventListener("load", () => {
-      if (submitted) {
-        window.location.href = "gracias.html";
-      }
-    });
-  }
-
   form.addEventListener("submit", (event) => {
+    event.preventDefault();
     const allValid = fields.map(validateField).every(Boolean);
 
     if (!allValid) {
-      event.preventDefault();
       if (note) {
         note.textContent = "Por favor corrige los campos marcados antes de enviar.";
         note.className = "form-note is-error";
@@ -103,23 +92,41 @@ export function initContactForm() {
       return;
     }
 
-    form.querySelector('[name="subject"]')?.remove();
-    const subjectField = document.createElement("input");
-    subjectField.type = "hidden";
-    subjectField.name = "subject";
-    subjectField.value = `Solicitud de cotización — ${form.querySelector('[name="nombre"]')?.value || ""}`;
-    form.appendChild(subjectField);
+    const formData = new FormData(form);
+    formData.set("subject", `Solicitud de cotización — ${formData.get("nombre") || ""}`);
 
     const submitButton = form.querySelector('button[type="submit"]');
     if (submitButton) {
       submitButton.disabled = true;
       submitButton.textContent = "Enviando...";
     }
+    if (note) {
+      note.textContent = "Enviando...";
+      note.className = "form-note";
+    }
 
-    submitted = true;
-    // El formulario se envía a un iframe oculto; al cargar la respuesta, redirigimos a gracias.html.
-    setTimeout(() => {
-      if (submitted) window.location.href = "gracias.html";
-    }, 4000);
+    fetch(form.action, {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.success) {
+          window.location.href = "/gracias.html";
+          return;
+        }
+        throw new Error(result.message || "Error desconocido");
+      })
+      .catch(() => {
+        if (note) {
+          note.textContent = "No pudimos enviar el mensaje. Intenta de nuevo o escríbenos por WhatsApp.";
+          note.className = "form-note is-error";
+        }
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = "Enviar mensaje";
+        }
+      });
   });
 }
