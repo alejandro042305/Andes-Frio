@@ -368,7 +368,6 @@ body.nav-open { overflow: hidden; }
 }
 
 /* ---------- Formularios ---------- */
-.form-honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form-field { margin-bottom: var(--space-5); }
 .form-field label { display: block; font-weight: 600; margin-bottom: var(--space-2); font-size: var(--fs-small); }
 .form-field input,

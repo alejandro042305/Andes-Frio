@@ -1,5 +1,3 @@
-const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
-
 function setFieldError(field, message) {
   const wrapper = field.closest(".form-field");
   const errorEl = wrapper.querySelector(".form-error");
@@ -83,10 +81,10 @@ export function initContactForm() {
   });
 
   form.addEventListener("submit", (event) => {
-    event.preventDefault();
     const allValid = fields.map(validateField).every(Boolean);
 
     if (!allValid) {
+      event.preventDefault();
       if (note) {
         note.textContent = "Por favor corrige los campos marcados antes de enviar.";
         note.className = "form-note is-error";
@@ -94,42 +92,18 @@ export function initContactForm() {
       return;
     }
 
-    const data = new FormData(form);
-    data.set("subject", `Solicitud de cotización — ${data.get("nombre") || ""}`);
-    data.set("from_name", data.get("nombre") || "Sitio web Andes Frío");
+    form.querySelector('[name="subject"]')?.remove();
+    const subjectField = document.createElement("input");
+    subjectField.type = "hidden";
+    subjectField.name = "subject";
+    subjectField.value = `Solicitud de cotización — ${form.querySelector('[name="nombre"]')?.value || ""}`;
+    form.appendChild(subjectField);
 
     const submitButton = form.querySelector('button[type="submit"]');
-    if (submitButton) submitButton.disabled = true;
-    if (note) {
-      note.textContent = "Enviando...";
-      note.className = "form-note";
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Enviando...";
     }
-
-    fetch(WEB3FORMS_ENDPOINT, {
-      method: "POST",
-      headers: { Accept: "application/json" },
-      body: data,
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.success) {
-          if (note) {
-            note.textContent = "¡Mensaje enviado! Te contactaremos el mismo día hábil.";
-            note.className = "form-note is-success";
-          }
-          form.reset();
-        } else {
-          throw new Error(result.message || "Error desconocido");
-        }
-      })
-      .catch(() => {
-        if (note) {
-          note.textContent = "No pudimos enviar el mensaje. Intenta de nuevo o escríbenos por WhatsApp.";
-          note.className = "form-note is-error";
-        }
-      })
-      .finally(() => {
-        if (submitButton) submitButton.disabled = false;
-      });
+    // El formulario se envía de forma nativa a Web3Forms y redirige a gracias.html.
   });
 }
