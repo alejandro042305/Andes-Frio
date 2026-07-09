@@ -80,11 +80,19 @@ export function initContactForm() {
     });
   });
 
+  const frameName = `web3forms-target-${Math.random().toString(36).slice(2)}`;
+  const iframe = document.createElement("iframe");
+  iframe.name = frameName;
+  iframe.style.display = "none";
+  iframe.title = "Envío de formulario";
+  document.body.appendChild(iframe);
+  form.target = frameName;
+
   form.addEventListener("submit", (event) => {
-    event.preventDefault();
     const allValid = fields.map(validateField).every(Boolean);
 
     if (!allValid) {
+      event.preventDefault();
       if (note) {
         note.textContent = "Por favor corrige los campos marcados antes de enviar.";
         note.className = "form-note is-error";
@@ -92,8 +100,12 @@ export function initContactForm() {
       return;
     }
 
-    const formData = new FormData(form);
-    formData.set("subject", `Solicitud de cotización — ${formData.get("nombre") || ""}`);
+    form.querySelector('[name="subject"]')?.remove();
+    const subjectField = document.createElement("input");
+    subjectField.type = "hidden";
+    subjectField.name = "subject";
+    subjectField.value = `Solicitud de cotización — ${form.querySelector('[name="nombre"]')?.value || ""}`;
+    form.appendChild(subjectField);
 
     const submitButton = form.querySelector('button[type="submit"]');
     if (submitButton) {
@@ -105,28 +117,30 @@ export function initContactForm() {
       note.className = "form-note";
     }
 
-    fetch(form.action, {
-      method: "POST",
-      headers: { Accept: "application/json" },
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.success) {
-          window.location.href = "/gracias.html";
-          return;
-        }
-        throw new Error(result.message || "Error desconocido");
-      })
-      .catch(() => {
-        if (note) {
-          note.textContent = "No pudimos enviar el mensaje. Intenta de nuevo o escríbenos por WhatsApp.";
-          note.className = "form-note is-error";
-        }
-        if (submitButton) {
-          submitButton.disabled = false;
-          submitButton.textContent = "Enviar mensaje";
-        }
-      });
+    let settled = false;
+    const fallbackTimer = setTimeout(() => {
+      if (settled) return;
+      settled = true;
+      if (note) {
+        note.textContent = "No pudimos confirmar el envío. Intenta de nuevo o escríbenos por WhatsApp.";
+        note.className = "form-note is-error";
+      }
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = "Enviar mensaje";
+      }
+    }, 10000);
+
+    iframe.addEventListener(
+      "load",
+      () => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(fallbackTimer);
+        window.location.href = "/gracias.html";
+      },
+      { once: true }
+    );
+    // El formulario se envía de forma nativa a un iframe oculto (Web3Forms bloquea fetch por CORS en este plan).
   });
 }
