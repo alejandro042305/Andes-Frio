@@ -80,6 +80,17 @@ export function initContactForm() {
     });
   });
 
+  const targetFrame = document.querySelector('iframe[name="web3forms-frame"]');
+  let submitted = false;
+
+  if (targetFrame) {
+    targetFrame.addEventListener("load", () => {
+      if (submitted) {
+        window.location.href = "gracias.html";
+      }
+    });
+  }
+
   form.addEventListener("submit", (event) => {
     const allValid = fields.map(validateField).every(Boolean);
 
@@ -104,6 +115,11 @@ export function initContactForm() {
       submitButton.disabled = true;
       submitButton.textContent = "Enviando...";
     }
-    // El formulario se envía de forma nativa a Web3Forms y redirige a gracias.html.
+
+    submitted = true;
+    // El formulario se envía a un iframe oculto; al cargar la respuesta, redirigimos a gracias.html.
+    setTimeout(() => {
+      if (submitted) window.location.href = "gracias.html";
+    }, 4000);
   });
 }
