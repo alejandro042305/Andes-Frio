@@ -412,6 +412,14 @@ body.nav-open { overflow: hidden; }
 .form-note.is-success { display: block; background: rgba(46, 158, 91, 0.12); color: var(--color-success); }
 .form-note.is-error { display: block; background: rgba(214, 69, 69, 0.12); color: var(--color-error); }
 
+.form-legal-note {
+  margin-top: var(--space-3);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+.form-legal-note a { color: var(--color-primary); text-decoration: underline; }
+
 /* ---------- Tarjetas genéricas (servicios, valores, pasos) ---------- */
 .icon-card {
   background: var(--color-surface);
